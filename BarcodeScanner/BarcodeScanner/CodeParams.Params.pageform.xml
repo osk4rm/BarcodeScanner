@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataForm DataType="INewBarCodeExample.CodeParams, INewBarCodeExample" Priority="1" ViewType="Form"
+		  xmlns="http://www.enova.pl/schema/form.xsd">
+    <Page Name="Params" CaptionHtml="Params" DataContext="{DataSource}" OuterWidth="400" OuterHeight="100">
+        <Field EditValue="{Code}" Width="30" CaptionHtml="Ilość" IsReadOnly="true" />
+    </Page>
+</DataForm>
