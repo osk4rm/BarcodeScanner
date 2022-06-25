@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataForm DataType="BarcodeScanner.PFTest, BarcodeScanner" Priority="1" ViewType="Form"
+		  xmlns="http://www.enova.pl/schema/form.xsd">
+	<Page Name="Params" CaptionHtml="Params" DataContext="{DataSource}" OuterWidth="100" OuterHeight="100">
+		<Label CaptionHtml="Welcome to Barcode Scanner by OM."/>
+		<Field EditValue="{Code}" Width="30" CaptionHtml="Last scanned code" IsReadOnly="true" />
+		<Command CaptionHtml="Usuń z listy" MethodName="DeleteItem" Width ="30"/>
+		<Grid Width="*" Height="*" EditValue="{Items}" IsToolbarVisible="true" EditButton="None" NewButton="None" RemoveButton="None" SelectedValue="{SelectedItems}" FocusedValue="{FocusedItem}">
+			<Field CaptionHtml="Kod" Width="9" EditValue="{Kod}" Footer="None" />
+			<Field CaptionHtml="Nazwa" Width="23" EditValue="{Nazwa}" Footer="None" />
+			<Field CaptionHtml="EAN" Width="17" EditValue="{EAN}" Footer="None" />
+		</Grid>
+	</Page>
+</DataForm>
+
+<!---->

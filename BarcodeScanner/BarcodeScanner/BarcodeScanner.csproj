@@ -3,8 +3,14 @@
   <PropertyGroup>
     <TargetFramework>$(SonetaTargetFramework)</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath></OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="Soneta.Products.Modules" Version="2204.2.4" />
     <PackageReference Update="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="TestWorkerParams.Ogolne.pageform.xml" />
   </ItemGroup>
 </Project>
