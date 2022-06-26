@@ -5,7 +5,7 @@ using Soneta.Business.UI;
 
 
 // Sposób w jaki należy zarejestrować page który będzie wyswietlany jako folderw interfejsie.
-[assembly: FolderView("BarcodeScanner/asdf",
+[assembly: FolderView("asdf",
     Priority = 100000,
     Description = "Niedziala",
     ObjectType = typeof(asdf),

@@ -7,8 +7,11 @@
     <OutputPath></OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Update="Soneta.Products.Modules" Version="2204.2.4" />
+    <PackageReference Update="Soneta.Products.Modules" Version="2204.3.5" />
     <PackageReference Update="System.ValueTuple" Version="4.5.0" />
+	  <EmbeddedResource Update="PFTest.ogolne.pageform.xml">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="TestWorkerParams.Ogolne.pageform.xml" />

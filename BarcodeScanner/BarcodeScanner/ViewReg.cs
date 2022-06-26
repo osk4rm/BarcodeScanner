@@ -11,11 +11,3 @@ using Soneta.Business.UI;
     ReadOnlySession = false,
     ConfigSession = false
 )]
-[assembly: FolderView("Zakladka",
-    Priority = 1,
-    Description = "Zakladka",
-    ObjectType = typeof(PFTest),
-    ObjectPage = "PFTest.ogolne.pageform.xml",
-    ReadOnlySession = false,
-    ConfigSession = false
-)]
