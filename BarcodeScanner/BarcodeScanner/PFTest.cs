@@ -17,11 +17,12 @@ namespace BarcodeScanner
 
         public PFTest(Context context) //: base(context)
         {
+
             Code = "1234";
             Items = new List<Item>();
 
-            Items.Add(new Item("CBA", "FED", "321", context));
-            Items.Add(new Item("ABC", "DEF", "123", context));
+            Items.Add(new Item("05022087001", "022087 ZESTAW KLUCZY TRZPIENIOWYCH SW1.5-10", "4013288104816", context));
+            Items.Add(new Item("1655892", "0513.15 KLUCZ PŁASKI 13X15 /CAROLUS/", "4036548513159", context));
         }
 
         [Context]
@@ -53,10 +54,48 @@ namespace BarcodeScanner
         public string Code { get; set; }
         public List<Item> Items { get; set; }
 
+
         public void DeleteItem()
         {
             Items.Remove(FocusedItem);
             Context.Session.InvokeChanged();
+        }
+
+        private HandelModule GetHandelModule()
+        {
+            return Context.Session.GetHandel();
+        }
+        private TowaryModule GetTowaryModule()
+        {
+            return Context.Session.GetTowary();
+        }
+
+        public object GeneratePZ()
+        {
+            var handelModule = Context.Session.GetHandel();
+            var towaryModule = Context.Session.GetTowary();
+            using (ITransaction t = Session.Logout(true))
+            {
+                DokumentHandlowy dh = new DokumentHandlowy();
+                handelModule.DokHandlowe.AddRow(dh);
+                dh.Definicja = handelModule.DefDokHandlowych.PrzyjęcieMagazynowe2;
+                dh.Magazyn = GetHandelModule().Magazyny.Magazyny.Firma;
+                //CreatePozycje(Items, dh);
+
+                foreach (var item in Items)
+                {
+                    PozycjaDokHandlowego pozDH = new PozycjaDokHandlowego(dh);
+                    handelModule.PozycjeDokHan.AddRow(pozDH);
+                    pozDH.Towar = towaryModule.Towary.WgKodu[item.Kod];
+                }
+
+                t.Commit();
+                return new FormActionResult
+                {
+                    EditValue = dh
+                };
+            }
+
         }
         public object Enter(Context cx, string code, double quantity)
         {
@@ -68,10 +107,10 @@ namespace BarcodeScanner
             //OnChanged();
 
             cx.Session.InvokeChanged();
-            
+
             return FormAction.None;
         }
-        
+
 
     }
     public class Item : ContextBase
@@ -94,5 +133,5 @@ namespace BarcodeScanner
 
 }
 
-    
+
 
