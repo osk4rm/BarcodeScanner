@@ -6,7 +6,7 @@
 		<Field EditValue="{Code}" Width="30" CaptionHtml="Last scanned code" IsReadOnly="true" />
 		<Row>
 			<Command CaptionHtml="Usuń z listy" MethodName="DeleteItem" Width ="30"/>
-			<Command CaptionHtml="Generuj PZ" MethodName="GeneratePZ" Width ="30"/>
+			<Command CaptionHtml="Generuj PZ" MethodName="GeneratePZDifferentWay" Width ="30"/>
 		</Row>
 		
 		<Grid Width="*" Height="*" EditValue="{Items}" IsToolbarVisible="true" EditButton="None" NewButton="None" RemoveButton="None" SelectedValue="{SelectedItems}" FocusedValue="{FocusedItem}">

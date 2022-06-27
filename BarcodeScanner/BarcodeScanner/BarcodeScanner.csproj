@@ -16,4 +16,7 @@
   <ItemGroup>
     <EmbeddedResource Remove="TestWorkerParams.Ogolne.pageform.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="MyWorker1WorkerParams.Ogolne.pageform.xml" />
+  </ItemGroup>
 </Project>

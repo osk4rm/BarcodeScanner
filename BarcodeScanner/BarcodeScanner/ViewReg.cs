@@ -9,5 +9,6 @@ using Soneta.Business.UI;
     ObjectType = typeof(PFTest),
     ObjectPage = "PFTest.ogolne.pageform.xml",
     ReadOnlySession = false,
-    ConfigSession = false
+    ConfigSession = false,
+    IconName = "kod_kreskowy"
 )]
