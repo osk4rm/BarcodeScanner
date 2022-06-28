@@ -5,14 +5,22 @@
 		<Label CaptionHtml="Welcome to Barcode Scanner by OM."/>
 		<Field EditValue="{Code}" Width="30" CaptionHtml="Last scanned code" IsReadOnly="true" />
 		<Row>
+			<Field EditValue="{Kontrahent}" Width="30" CaptionHtml="Kontrahent" IsReadOnly="false" />
+			<Field EditValue="{Magazyn}" Width="30" CaptionHtml="Magazyn" IsReadOnly="false" />
+		</Row>
+
+		<Row>
 			<Command CaptionHtml="Usuń z listy" MethodName="DeleteItem" Width ="30"/>
-			<Command CaptionHtml="Generuj PZ" MethodName="GeneratePZDifferentWay" Width ="30"/>
+			<Command CaptionHtml="Generuj PZ" MethodName="GeneratePZ" Width ="30"/>
+			<Command CaptionHtml="Generuj PZ + form" MethodName="GeneratePZWithForm" Width ="30"/>
 		</Row>
 		
-		<Grid Width="*" Height="*" EditValue="{Items}" IsToolbarVisible="true" EditButton="None" NewButton="None" RemoveButton="None" SelectedValue="{SelectedItems}" FocusedValue="{FocusedItem}">
-			<Field CaptionHtml="Kod" Width="9" EditValue="{Kod}" Footer="None" />
-			<Field CaptionHtml="Nazwa" Width="23" EditValue="{Nazwa}" Footer="None" />
-			<Field CaptionHtml="EAN" Width="17" EditValue="{EAN}" Footer="None" />
+		<Grid Width="*" Height="*" EditValue="{Items}" IsToolbarVisible="true"
+			  EditButton="None" NewButton="None" RemoveButton="None" SelectedValue="{SelectedItems}" FocusedValue="{FocusedItem}" EditInPlace="true" AlwaysAddNewRow="true">
+			<Field CaptionHtml="Kod" Width="25" EditValue="{Kod}" Footer="None" IsReadOnly="true"/>
+			<Field CaptionHtml="Nazwa" Width="30" EditValue="{Nazwa}" Footer="None" IsReadOnly="true" />
+			<Field CaptionHtml="EAN" Width="25" EditValue="{EAN}" Footer="None" IsReadOnly="true"/>
+			<Field CaptionHtml="Ilość" Width="7" EditValue="{Qty}" Footer="None"/>
 		</Grid>
 	</Page>
 </DataForm>
