@@ -20,7 +20,7 @@ namespace BarcodeScanner
         [Context]
         public Session Session { get; set; }
 
-        [Action("Skanuj towar", Mode = ActionMode.SingleSession, Icon = ActionIcon.CodeView)]
+        [Action("Skanuj towar", Mode = ActionMode.IsolatedSession, Icon = ActionIcon.CodeView)]
         public object ScanItem(Context context)
         {
             var @params = new ScanItemWorkerParams(context);
@@ -30,26 +30,30 @@ namespace BarcodeScanner
                 Context = context,
                 CommittedHandler = cx =>
                 {
-                    foreach(var item in @params.Items)
+                    try
                     {
-                        using(Session sn = Login.CreateSession(false, false))
+                        foreach (var item in @params.Items)
                         {
-                            using (ITransaction t = sn.Logout(true))
+                            using (ITransaction t = @params.Session.Logout(true))
                             {
-                                DokumentHandlowy sd = HandelModule.GetInstance(t).DokHandlowe.Rows.FirstOrDefault(e => e.ID == Dokument.ID) as DokumentHandlowy;
-                                PozycjaDokHandlowego pozycja = new PozycjaDokHandlowego(sd);
+                                DokumentHandlowy dokHan = HandelModule.GetInstance(t).DokHandlowe.Rows.FirstOrDefault(e => e.ID == Dokument.ID) as DokumentHandlowy;
+
+                                PozycjaDokHandlowego pozycja = new PozycjaDokHandlowego(dokHan);
                                 HandelModule.GetInstance(t).PozycjeDokHan.AddRow(pozycja);
                                 pozycja.Towar = TowaryModule.GetInstance(t).Towary.WgKodu[item.Kod];
                                 pozycja.Ilosc = item.Qty;
                                 t.Commit();
                             }
-                            sn.Save();
                         }
+                        @params.Items.Clear();
+                        Dokument.Session.InvokeChanged();
+
+                        return FormAction.None;
                     }
-                    @params.Items.Clear();
-                    Dokument.Session.InvokeChanged();
-                    
-                    return FormAction.Refresh;
+                    catch(Exception e)
+                    {
+                        return e.Message;
+                    }
                 }
             };
 
@@ -69,8 +73,7 @@ namespace BarcodeScanner
             Items.Add(new Item("05022087001", "022087 ZESTAW KLUCZY TRZPIENIOWYCH SW1.5-10", "4013288104816", context));
             Items.Add(new Item("1655892", "0513.15 KLUCZ PŁASKI 13X15 /CAROLUS/", "4036548513159", context));
         }
-        [Context]
-        public Session Session { get; set; }
+
         public Item[] SelectedItems
         {
             get => _selectedItems;
@@ -93,9 +96,15 @@ namespace BarcodeScanner
                 OnChanged();
             }
         }
-        
+
         public string Code { get; set; }
         public List<Item> Items { get; set; }
+
+        public void DeleteItem()
+        {
+            Items.Remove(FocusedItem);
+            Context.Session.InvokeChanged();
+        }
 
         public object Enter(Context cx, string code, double quantity)
         {
