@@ -1,5 +1,7 @@
 ﻿using BarcodeScanner;
+using Soneta.Business;
 using Soneta.Business.UI;
+using Soneta.Handel;
 
 
 // Sposób w jaki należy zarejestrować page który będzie wyswietlany jako folderw interfejsie.
@@ -12,3 +14,5 @@ using Soneta.Business.UI;
     ConfigSession = false,
     IconName = "kod_kreskowy"
 )]
+
+[assembly: Worker(typeof(ScanItemWorker), typeof(DokumentHandlowy))]

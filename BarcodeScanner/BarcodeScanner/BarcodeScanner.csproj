@@ -9,14 +9,15 @@
   <ItemGroup>
     <PackageReference Update="Soneta.Products.Modules" Version="2204.3.5" />
     <PackageReference Update="System.ValueTuple" Version="4.5.0" />
-	  <EmbeddedResource Update="PFTest.ogolne.pageform.xml">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Remove="TestWorkerParams.Ogolne.pageform.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Remove="MyWorker1WorkerParams.Ogolne.pageform.xml" />
+    <EmbeddedResource Update="PageformScanner\PFTest.ogolne.pageform.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>  
+    <ItemGroup>
+    <EmbeddedResource Update="ScanItemWorkerParams.Ogolne.pageform.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

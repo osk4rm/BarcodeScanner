@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataForm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xmlns="http://www.enova.pl/schema/form.xsd"
+          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd"
+          Priority="10000" 
+          DataType="BarcodeScanner.ScanItemWorkerParams,BarcodeScanner">
+  <Page Name="ScanItemWorkerParamsPage" CaptionHtml="Barcode scanner" DataContext="{DataSource}">
+	  <Label CaptionHtml="Welcome to Barcode Scanner by OM."/>
+	  <Field EditValue="{Code}" Width="30" CaptionHtml="Last scanned code" IsReadOnly="true" />
+	  <Command CaptionHtml="Usuń z listy" MethodName="DeleteItem" Width ="30"/>
+
+	  <Grid Width="*" Height="*" EditValue="{Items}" IsToolbarVisible="true"
+			EditButton="None" NewButton="None" RemoveButton="None" SelectedValue="{SelectedItems}" FocusedValue="{FocusedItem}" EditInPlace="true" AlwaysAddNewRow="true">
+		  <Field CaptionHtml="Kod" Width="25" EditValue="{Kod}" Footer="None" IsReadOnly="true"/>
+		  <Field CaptionHtml="Nazwa" Width="30" EditValue="{Nazwa}" Footer="None" IsReadOnly="true" />
+		  <Field CaptionHtml="EAN" Width="25" EditValue="{EAN}" Footer="None" IsReadOnly="true"/>
+		  <Field CaptionHtml="Ilość" Width="7" EditValue="{Qty}" Footer="None"/>
+	  </Grid>
+  </Page>
+</DataForm>
